@@ -5,7 +5,10 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
   final Function onRestart;
 
   ///Constructor
-  ResultWidget({@required this.won, @required this.onRestart});
+  ResultWidget({
+    @required this.won,
+    @required this.onRestart,
+  });
 
   Color _getColor() {
     if (won == null) {
@@ -37,9 +40,14 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
           child: CircleAvatar(
             backgroundColor: _getColor(),
             child: IconButton(
-                padding: EdgeInsets.all(0.0),
-                icon: Icon(_getIcon(), color: Colors.black, size: 35),
-                onPressed: onRestart),
+              padding: EdgeInsets.all(0.0),
+              icon: Icon(
+                _getIcon(),
+                color: Colors.black,
+                size: 35,
+              ),
+              onPressed: onRestart,
+            ),
           ),
         ),
       ),
