@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
   final bool won;
   final Function onRestart;
+  final int qtyBombs;
 
   ///Constructor
-  ResultWidget({
-    @required this.won,
-    @required this.onRestart,
-  });
+  ResultWidget(
+      {@required this.won, @required this.onRestart, @required this.qtyBombs});
+
+  get _getQtyBombs => qtyBombs;
 
   Color _getColor() {
     if (won == null) {
@@ -37,17 +38,42 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         child: Container(
           padding: EdgeInsets.all(10.0),
-          child: CircleAvatar(
-            backgroundColor: _getColor(),
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Icon(
-                _getIcon(),
-                color: Colors.black,
-                size: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                      icon: Icon(
+                        Icons.flag,
+                        color: Colors.red.shade900,
+                        size: 35,
+                      ),
+                      onPressed: null),
+                  Text(
+                    '$_getQtyBombs',
+                    style: TextStyle(
+                      fontFamily: 'roboto',
+                      color: Colors.red.shade900,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
               ),
-              onPressed: onRestart,
-            ),
+              CircleAvatar(
+                backgroundColor: _getColor(),
+                child: IconButton(
+                  padding: EdgeInsets.all(0.0),
+                  icon: Icon(
+                    _getIcon(),
+                    color: Colors.black,
+                    size: 35,
+                  ),
+                  onPressed: onRestart,
+                ),
+              ),
+            ],
           ),
         ),
       ),

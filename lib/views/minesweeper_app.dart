@@ -13,6 +13,7 @@ class MinesweeperApp extends StatefulWidget {
 class _MinesweeperAppState extends State<MinesweeperApp> {
   bool _won;
   Board _board;
+  int qtyBombs = 60;
 
   _restart() {
     setState(() {
@@ -46,7 +47,7 @@ class _MinesweeperAppState extends State<MinesweeperApp> {
     });
   }
 
-  Board _getBoard(double width, double height) {
+  Board _getBoard(double width, double height, int bombs) {
     if (_board == null) {
       int qtyColumns = 15;
       double sizeField = width / qtyColumns;
@@ -55,7 +56,7 @@ class _MinesweeperAppState extends State<MinesweeperApp> {
       _board = Board(
         lines: qtyLines,
         columns: qtyColumns,
-        qtyBombs: 3,
+        qtyBombs: bombs,
       );
     }
     return _board;
@@ -68,6 +69,7 @@ class _MinesweeperAppState extends State<MinesweeperApp> {
         appBar: ResultWidget(
           won: _won,
           onRestart: _restart,
+          qtyBombs: qtyBombs,
         ),
         body: Container(
           color: Colors.grey,
@@ -76,6 +78,7 @@ class _MinesweeperAppState extends State<MinesweeperApp> {
               board: _getBoard(
                 constraints.maxWidth,
                 constraints.maxHeight,
+                qtyBombs,
               ),
               onOpen: _open,
               onChangeFlag: _changeFlag,
